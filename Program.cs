@@ -10,7 +10,10 @@ namespace ST10187895_PROG6221_POE
     {
         static void Main(string[] args)
         {
-
+            workingClass recipe = new workingClass();
+            recipe.recipeManagerMenu();
+            recipe.addIngredients();
+            recipe.DisplayRecipe();
         }
     }
 }
