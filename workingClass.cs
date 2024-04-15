@@ -12,13 +12,16 @@ namespace ST10187895_PROG6221_POE
     {
         public string recipeName;
         public int numIngredients;
-        public string ingredientName;
+        /*public string ingredientName;
         public double ingredientQuant;
-        public string unitMeasurement;
+        public string unitMeasurement;*/
         public int recipeSteps;
         public int step;
         public double scale;
         string[] ingredients = new string[0];
+        double[] ingredientQuant = new double[0];
+        string[] unitMeasurement = new string[0];
+
         public int menuOption;
 
         public  int welcomeMenu()
@@ -34,25 +37,30 @@ namespace ST10187895_PROG6221_POE
         }
         public void recipeManagerMenu()
         {
-            Console.WriteLine("Choose an option from the menu below: \n" +
-                "1) Add Recipe \n" +
-                "2) View Recipe \n" +
-                "3) Exit");
-            menuOption = int.Parse(Console.ReadLine());
-            switch (menuOption)
-			{
-				case 1:
-                    nameRecipe();
-                    addIngredients();
-					break;
-				case 2:
-                    DisplayRecipe();
-					break;
-				case 3:
-					Console.WriteLine("Thank you for using the Recipe Management System");
-					break;
-				
-			}
+            int exitMenu = 0;
+            while (exitMenu < 1)
+            {
+                Console.WriteLine("Choose an option from the menu below: \n" +
+                    "1) Add Recipe \n" +
+                    "2) View Recipe \n" +
+                    "3) Exit");
+                menuOption = int.Parse(Console.ReadLine());
+                switch (menuOption)
+                {
+                    case 1:
+                        nameRecipe();
+                        addIngredients();
+                        break;
+                    case 2:
+                        DisplayRecipe();
+                        break;
+                    case 3:
+                        Console.WriteLine("Thank you for using the Recipe Management System");
+                        exitMenu++;
+                        break;
+
+                }
+            }
 
         }
 
@@ -64,21 +72,27 @@ namespace ST10187895_PROG6221_POE
 
         public void addIngredients()
         {
+            
             Console.WriteLine("Please enter the number of Ingredients in your Recipe");
             numIngredients = int.Parse(Console.ReadLine());
-            
-            Console.WriteLine("Please enter the name of the ingredient: ");
-            ingredientName = Console.ReadLine();
-            Console.WriteLine("Please enter the quantity: ");
-            ingredientQuant = double.Parse(Console.ReadLine());
+
+            for (int i = 0; i< numIngredients; i++)
+            {
+                Console.WriteLine("Please enter the name of the ingredient: ");
+                ingredients[i] = Console.ReadLine();
+                Console.WriteLine("Please enter the quantity by entering ONLY the numeric value: \n" +
+                    "(you will be prompted to include the unit of measurement next)");
+                ingredientQuant[i] = double.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter the unit of measurement for the previous value: \n" +
+                    "(e.g cups, ml, grams etc...)");
+                unitMeasurement[i] = Console.ReadLine();
+            }
         }
 
         public void DisplayRecipe()
         {
-            Console.WriteLine("This has worked");
-
             Console.WriteLine($"RecipeName: \t" + recipeName + 
-                                "Number of Ingredients: \t" + numIngredients );
+                               "Number of Ingredients: \t" + numIngredients );
 
         }
 
