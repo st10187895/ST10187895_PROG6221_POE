@@ -44,7 +44,8 @@ namespace ST10187895_PROG6221_POE
                 Console.WriteLine("Choose an option from the menu below: \n" +
                     "1) Add Recipe \n" +
                     "2) View Recipe \n" +
-                    "3) Exit");
+                    "3) Clear Recipe \n" +
+                    "4) Exit");
                 menuOption = int.Parse(Console.ReadLine());
                 switch (menuOption)
                 {
@@ -57,6 +58,9 @@ namespace ST10187895_PROG6221_POE
                         DisplayRecipe();
                         break;
                     case 3:
+                        clearData();
+                        break;
+                    case 4:
                         Console.WriteLine("Thank you for using the Recipe Management System");
                         Environment.Exit(0);
                         break;
@@ -114,11 +118,15 @@ namespace ST10187895_PROG6221_POE
         {
             Console.WriteLine("How many Servings do you want to make?");
             scale = double.Parse(Console.ReadLine());
+            if (scale == 1/2)
+            {
+                scale = 0.5;
+            }
 
             Console.WriteLine($"RecipeName: " + recipeName + "\n" +
                                "Number of Ingredients: " + numIngredients + "\n" );
             Console.WriteLine("Ingredients \t" + "Quanity \t" + "Measurement");
-
+            
             for (int j = 0; j < ingredients.Length; j++)
             {
                 
@@ -130,6 +138,15 @@ namespace ST10187895_PROG6221_POE
                 Console.WriteLine($"{y+1})" + steps[y]);
             }
 
+        }
+
+        public void clearData()
+        {
+            recipeName = null;
+            ingredients = null;
+            ingredientQuant = null;
+            unitMeasurement = null;
+            steps = null;
         }
 
     }
