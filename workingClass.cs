@@ -5,16 +5,16 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-
+/*references:
+https://learn.microsoft.com/en-us/dotnet/api/system.array.resize?view=net-8.0 (used to change array size in addIngredients() and addSteps() methods
+*/
 namespace ST10187895_PROG6221_POE
 {
     public class workingClass
     {
+        //Declarations
         public string recipeName;
         public int numIngredients;
-        /*public string ingredientName;
-        public double ingredientQuant;
-        public string unitMeasurement;*/
         public int recipeSteps;
         public int numSteps;
         public double scale;
@@ -22,9 +22,9 @@ namespace ST10187895_PROG6221_POE
         double[] ingredientQuant = new double[0];
         string[] unitMeasurement = new string[0];
         string[] steps = new string[0];
-
         public int menuOption;
 
+        //The welcomeMenu() method is used as a welcome screen to grant user access to the Recipe Manager Menu
         public  int welcomeMenu()
         {
             Console.WriteLine("Welcome to the Recipe Manager: \n" +
@@ -36,9 +36,13 @@ namespace ST10187895_PROG6221_POE
 
             return startMenuInput;
         }
+
+        /*The recipeManagerMenu() method serves as a main menu that prompts users to choose an option.
+        this method also uses a switch that receives the user input in the form of an int in which each case calls a corresponding method*/
         public void recipeManagerMenu()
         {
             int exitMenu = 0;
+            //this while statement is used to return the user to the main menu after completing any function
             while (exitMenu < 1)
             {
                 Console.WriteLine("Choose an option from the menu below: \n" +
@@ -55,7 +59,15 @@ namespace ST10187895_PROG6221_POE
                         addSteps();
                         break;
                     case 2:
-                        DisplayRecipe();
+                        if (numIngredients == 0)
+                        {
+                            Console.WriteLine("No Recipe has been stored \n" +
+                            "Add Recipe first");
+                        }
+                        else
+                        {
+                            DisplayRecipe();
+                        }
                         break;
                     case 3:
                         clearData();
@@ -70,20 +82,24 @@ namespace ST10187895_PROG6221_POE
 
         }
 
+        // the nameRecipe() method is used to obtain a recipe name from the user
         public void nameRecipe()
         {
             Console.WriteLine("Enter the name of your recipe");
             recipeName = Console.ReadLine();
         }
 
+        // the addIngredients() method prompts the user for information regarding their recipe and adds that information to the corresponding arrays
         public void addIngredients()
         {
             
             Console.WriteLine("Please enter the number of Ingredients in your Recipe");
             numIngredients = int.Parse(Console.ReadLine());
-
+            /* this for-loop is used to persist the user for each ingredient, ingredient quantity and unit measurement based on the number 
+            of ingredients entered by the user above*/
             for (int i = 0; i< numIngredients; i++)
             {
+                // each array needed to be resized in order to address issues regarding "out of index" errors  
                 Array.Resize(ref ingredients, numIngredients);
                 Array.Resize(ref ingredientQuant, numIngredients);
                 Array.Resize(ref unitMeasurement, numIngredients);
@@ -101,6 +117,7 @@ namespace ST10187895_PROG6221_POE
 
         }
 
+        //the addSteps() method prompts the user to add each step of their recipe by using a for loop to add each step to a new index
         public void addSteps()
         {
             Console.WriteLine("How many steps are there in your recipe?");
@@ -113,7 +130,9 @@ namespace ST10187895_PROG6221_POE
             }
             Console.WriteLine("Steps Captured!");
         }
-
+        /*the DisplayRecipe() method asks the user for the number servings they wish to make and scale the recipe accordingly. 
+        This method uses a for loop to output each stored value from the indices of the ingredients[], ingredientsQuant[] and unitMeasurement[] arrays
+        This method also displays each step for the recipe by using a for-loop*/
         public void DisplayRecipe()
         {
             Console.WriteLine("How many Servings do you want to make?");
@@ -139,7 +158,7 @@ namespace ST10187895_PROG6221_POE
             }
 
         }
-
+        //the clearData method clears all stored values by setting them to null
         public void clearData()
         {
             recipeName = null;
