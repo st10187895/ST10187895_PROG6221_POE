@@ -78,6 +78,10 @@ namespace ST10187895_PROG6221_POE
 
             for (int i = 0; i< numIngredients; i++)
             {
+                Array.Resize(ref ingredients, numIngredients);
+                Array.Resize(ref ingredientQuant, numIngredients);
+                Array.Resize(ref unitMeasurement, numIngredients);
+
                 Console.WriteLine("Please enter the name of the ingredient: ");
                 ingredients[i] = Console.ReadLine();
                 Console.WriteLine("Please enter the quantity by entering ONLY the numeric value: \n" +
@@ -86,13 +90,15 @@ namespace ST10187895_PROG6221_POE
                 Console.WriteLine("Please enter the unit of measurement for the previous value: \n" +
                     "(e.g cups, ml, grams etc...)");
                 unitMeasurement[i] = Console.ReadLine();
+
             }
         }
 
         public void DisplayRecipe()
         {
-            Console.WriteLine($"RecipeName: \t" + recipeName + 
-                               "Number of Ingredients: \t" + numIngredients );
+            Console.WriteLine($"RecipeName: \t" + recipeName + "\n" +
+                               "Number of Ingredients: \t" + numIngredients + "\n" +
+                               "Ingredients: \n" +);
 
         }
 
