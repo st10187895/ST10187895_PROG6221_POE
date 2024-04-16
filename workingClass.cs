@@ -21,6 +21,7 @@ namespace ST10187895_PROG6221_POE
         string[] ingredients = new string[0];
         double[] ingredientQuant = new double[0];
         string[] unitMeasurement = new string[0];
+        string[] steps = new string[0];
 
         public int menuOption;
 
@@ -55,8 +56,11 @@ namespace ST10187895_PROG6221_POE
                         DisplayRecipe();
                         break;
                     case 3:
+                        addSteps();
+                        break;
+                    case 4:
                         Console.WriteLine("Thank you for using the Recipe Management System");
-                        exitMenu++;
+                        Environment.Exit(0);
                         break;
 
                 }
@@ -94,11 +98,22 @@ namespace ST10187895_PROG6221_POE
             }
         }
 
+        public void addSteps()
+        {
+
+        }
+
         public void DisplayRecipe()
         {
-            Console.WriteLine($"RecipeName: \t" + recipeName + "\n" +
-                               "Number of Ingredients: \t" + numIngredients + "\n" +
-                               "Ingredients: \n" +);
+            Console.WriteLine($"RecipeName: " + recipeName + "\n" +
+                               "Number of Ingredients: " + numIngredients + "\n" );
+            Console.WriteLine("Ingredients \t" + "Quanity \t" + "Measurement");
+
+            for (int j = 0; j < ingredients.Length; j++)
+            {
+                
+                Console.WriteLine(ingredients[j] + "\t        " + ingredientQuant[j] + "\t        " + unitMeasurement[j]);
+            }
 
         }
 
