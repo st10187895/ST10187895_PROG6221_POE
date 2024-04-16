@@ -92,8 +92,9 @@ namespace ST10187895_PROG6221_POE
                 Console.WriteLine("Please enter the unit of measurement for the previous value: \n" +
                     "(e.g cups, ml, grams etc...)");
                 unitMeasurement[i] = Console.ReadLine();
+                }
+            Console.WriteLine("Ingredients Captured!");
 
-            }
         }
 
         public void addSteps()
@@ -106,10 +107,14 @@ namespace ST10187895_PROG6221_POE
                 Console.WriteLine($"Enter step {k + 1}");
                 steps[k] = Console.ReadLine();
             }
+            Console.WriteLine("Steps Captured!");
         }
 
         public void DisplayRecipe()
         {
+            Console.WriteLine("How many Servings do you want to make?");
+            scale = double.Parse(Console.ReadLine());
+
             Console.WriteLine($"RecipeName: " + recipeName + "\n" +
                                "Number of Ingredients: " + numIngredients + "\n" );
             Console.WriteLine("Ingredients \t" + "Quanity \t" + "Measurement");
@@ -117,12 +122,12 @@ namespace ST10187895_PROG6221_POE
             for (int j = 0; j < ingredients.Length; j++)
             {
                 
-                Console.WriteLine(ingredients[j] + "\t        " + ingredientQuant[j] + "\t        " + unitMeasurement[j]);
+                Console.WriteLine(ingredients[j] + "\t        " + ingredientQuant[j]*scale + "\t        " + unitMeasurement[j]);
             }
             Console.WriteLine("Steps: ");
             for (int y = 0;y < numSteps; y++)
             {
-                Console.WriteLine(steps[y] + "\n");
+                Console.WriteLine($"{y+1})" + steps[y]);
             }
 
         }
